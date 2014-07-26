@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:int="http://www.springframework.org/schema/integration"
+    xmlns:int-mqtt="http://www.springframework.org/schema/integration/mqtt"
+   xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+        http://www.springframework.org/schema/integration/mqtt http://www.springframework.org/schema/integration/mqtt/spring-integration-mqtt.xsd
+        http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+ <task:annotation-driven />
+ 
+<bean id="clientFactory" class="org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory"/>
+<bean id="eventPublisher" class="net.daviant.poc.mqtt.SpringIntegrationEventPublisher"/>
+
+<int:channel id="eventChannel"/>
+<int:object-to-json-transformer id="eventTransformer" input-channel="eventChannel" output-channel="mqtt-publish-channel"/>
+
+    <int-mqtt:outbound-channel-adapter id="mqtt-publish-channel"
+            client-id="spring-foo-1"
+            client-factory="clientFactory"
+            auto-startup="true"
+            url="tcp://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:61614"
+            default-qos="0"
+            default-retained="true"
+            default-topic="event" />
+
+<!-- these elements define a flow MQTT subscribe->transform->File -->
+<!-- referred to as "inbound" in the README -->
+
+  
+
+</beans>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../../js/fullcalendar/fullcalendar.css' rel='stylesheet' />
+<link href='../../js/fullcalendar/fullcalendar.print.css'
+	rel='stylesheet' media='print' />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src='../../js/moment.min.js'></script>
+<!-- <script src='../../js/jquery-1.4.2.min.js'></script> -->
+
+<script src='../../js/jquery-ui.custom.min.js'></script>
+<script src='../../js/fullcalendar/fullcalendar.min.js'></script>
+<script src='../mqttws31.js'></script>
+<script>
+	$(document).ready(function() {
+		var destination = "event";
+		var host;
+		 $('#connect-btn').click(function () {
+			    var btn = $(this)
+			    btn.button('loading')
+			    
+			    host = $("#connect_host").val();    
+			    var port = $("#connect_port").val();
+			    var clientId = $("#connect_clientId").val();
+			    
+
+			    
+			    client = new Messaging.Client(host, Number(port), clientId);
+
+			    client.onConnect = onConnect;
+			  
+			    client.onMessageArrived = onMessageArrived;
+			    client.onConnectionLost = onConnectionLost;            
+
+			    client.connect({onSuccess:onConnect, onFailure:onFailure}); 
+			    return false;
+			  });  
+			    
+		    // the client is notified when it is connected to the server.
+		    var onConnect = function(frame) {
+		       $('#connect-btn').fadeOut({ duration: 'fast' });
+		      client.subscribe(destination);
+		      $('#success-alert').text("Successfully connected to "+host);
+		      $('#success-alert').removeClass( "hidden" ).addClass( "show" );
+		      //$('#success-alert').fadeIn({ duration: 'fast' });
+		    };  
+
+		    
+		  function onFailure(failure) {
+		    $('#connect-btn').fadeIn({ duration: 'fast' });
+		    $('#error-alert').text("Error while establishing web socket connection: "+failure.errorMessage);
+		    $('#error-alert').removeClass( "hidden" ).addClass( "show" );
+		    //$('#error-alert').fadeIn({ duration: 'fast' });
+		    $('#connect-btn').button('reset');
+		  }  
+
+		  function onMessageArrived(message) {
+		    var event = $.parseJSON(message.payloadString);
+		    $('#calendar').fullCalendar('renderEvent', event, true);
+		  }
+
+		  function onConnectionLost(responseObject) {
+		    if (responseObject.errorCode !== 0) {
+		       $('#error-alert').text("Connection lost from server: "+responseObject.errorCode);
+		       $('#error-alert').removeClass( "hidden" ).addClass( "show" );
+		       $('#connect-btn').fadeIn({ duration: 'fast' });
+		    }
+		    
+		  }
+
+		 
+		 
+		 
+		$('#calendar').fullCalendar({
+			header : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'month,agendaWeek,agendaDay'
+			},
+
+			editable : true,
+			slotDuration: '00:15:00'
+			
+		});
+
+	});
+</script>
+<style>
+body {
+	margin: 15px;
+	padding: 0;
+	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 14px;
+}
+
+#calendar {
+	width: 900px;
+	float: left;
+	margin-left:10px;
+}
+
+#connect {
+	width: 220px;
+	float: left;
+}
+</style>
+</head>
+<body>
+<div id="error-alert" class="alert alert-danger alert-dismissable hidden">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  </div>
+
+<div id="success-alert" class="alert alert-success alert-dismissable hidden">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+</div>
+
+	<div id="connect" class="well">
+		<form id='connect_form' class="form-inline" role="form">
+		<fieldset  ><legend>Settings</legend>
+			
+			<div class="form-group">
+				<label for="connect_host">Web Socket Host</label> 
+				
+				<input type="text" name="host"
+					class="form-control input-sm" id='connect_host' value='localhost' width="150px">
+					
+			</div>
+			<div class="form-group">
+				<label for=connect_port>Server Port</label> <input type="text" id='connect_port'
+					class="form-control input-sm " placeholder="Server Port" value="61613" width="150px">
+			</div>
+			<div class="form-group">
+				<label for=connect_clientId style="width: 76px">Client ID</label> <input type="text" id='connect_clientId'
+					class="form-control input-sm" placeholder="Client ID" value="clientId" width="150px">
+			</div>
+			<button id="connect-btn" type="submit" data-loading-text="Connecting..." class="btn btn-primary" style="margin-top: 5px">Connect</button>
+			
+			</fieldset>
+		</form>
+	</div>
+	<div id='calendar'></div>
+
+
+
+</body>
+</html>
