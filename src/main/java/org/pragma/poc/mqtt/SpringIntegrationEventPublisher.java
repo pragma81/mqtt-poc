@@ -1,4 +1,4 @@
-package net.daviant.poc.mqtt;
+package org.pragma.poc.mqtt;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

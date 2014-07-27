@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.daviant.poc.mqtt;
+package org.pragma.poc.mqtt;
 
 /**
  * @author Davide Antelmo
