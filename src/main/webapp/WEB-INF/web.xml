@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_2_5.xsd">
-    <display-name>Cocktail App</display-name>
-
-
-<context-param>
-	<param-name>contextConfigLocation</param-name>
-	<param-value>classpath:applicationContext.xml</param-value>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Cocktail App</display-name>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
- <welcome-file-list>
- <welcome-file>agenda.html</welcome-file>
- </welcome-file-list>
- 
+  <welcome-file-list>
+    <welcome-file>agenda.html</welcome-file>
+  </welcome-file-list>
   <listener>
     <listener-class>
           org.springframework.web.context.ContextLoaderListener
     </listener-class>
   </listener>
-  
-   
 </web-app>
