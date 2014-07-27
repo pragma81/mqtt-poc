@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>mqtttomcat</groupId>
-	<artifactId>mqtttomcat</artifactId>
+	<groupId>org.pragma</groupId>
+	<artifactId>mqtt-poc</artifactId>
 	<packaging>war</packaging>
 	<version>1.0</version>
-	<name>mqtttomcat</name>
+	<name>mqtt-poc</name>
 	<repositories>
 		<repository>
 			<id>eap</id>
@@ -386,7 +386,7 @@
 			<id>openshift</id>
 			
 			<build>
-				<finalName>mqtttomcat</finalName>
+				<finalName>mqttpoc</finalName>
 				<plugins>
 					<plugin>
 						<artifactId>maven-war-plugin</artifactId>

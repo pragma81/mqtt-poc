@@ -8,6 +8,9 @@
 	<param-name>contextConfigLocation</param-name>
 	<param-value>classpath:applicationContext.xml</param-value>
   </context-param>
+ <welcome-file-list>
+ <welcome-file>agenda.html</welcome-file>
+ </welcome-file-list>
  
   <listener>
     <listener-class>
