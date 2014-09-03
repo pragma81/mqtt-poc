@@ -18,11 +18,11 @@
 			</snapshots>
 		</repository>
 		<repository>
-        <id>apache paho</id>
-        <name>Public Apache Paho repository</name>
-        <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
-    </repository>
-    <repository>
+			<id>apache paho</id>
+			<name>Public Apache Paho repository</name>
+			<url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
+		</repository>
+		<repository>
 			<id>repo.spring.io.milestone</id>
 			<name>SpringSource Maven Milestone Repository</name>
 			<url>https://repo.spring.io/libs-milestone</url>
@@ -40,17 +40,17 @@
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
-            		<id>apache.snapshots</id>
-            		<name>Apache Snapshots</name>
-            		<url>http://repository.apache.org/content/groups/snapshots-group/</url>
-            		<releases>
-                		<enabled>false</enabled>
-            		</releases>
-            		<snapshots>
-                		<enabled>true</enabled>
-         	   	</snapshots>
-        		</pluginRepository>
-		</pluginRepositories>
+			<id>apache.snapshots</id>
+			<name>Apache Snapshots</name>
+			<url>http://repository.apache.org/content/groups/snapshots-group/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
@@ -71,10 +71,30 @@
 			</dependency>
 			<dependency>
 				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-broker</artifactId>
+				<version>${activemq-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-spring</artifactId>
+				<version>${activemq-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-kahadb-store</artifactId>
+				<version>${activemq-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-pool</artifactId>
 				<version>${activemq-version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-http</artifactId>
+				<version>${activemq-version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-mqtt</artifactId>
@@ -160,16 +180,29 @@
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-mqtt</artifactId>
-			<version>${spring-integration-version}</version>
+				<groupId>org.springframework.integration</groupId>
+				<artifactId>spring-integration-mqtt</artifactId>
+				<version>${spring-integration-version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
-		<!-- <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-core</artifactId> 
-			<version>1.0.13</version> </dependency> <dependency> <groupId>ch.qos.logback</groupId> 
-			<artifactId>logback-classic</artifactId> <version>1.0.13</version> </dependency> -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.13</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -178,14 +211,15 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.6</version>
+			<version>1.7.5</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.6</version>
-		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -199,19 +233,46 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- dependency> <groupId>org.apache.activemq</groupId> <artifactId>activemq-all</artifactId> 
+			<exclusions> <exclusion> <artifactId>slf4j-api</artifactId> <groupId>org.slf4j</groupId> 
+			</exclusion> </exclusions> </dependency -->
+
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-all</artifactId>
+			<artifactId>activemq-broker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-http</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-kahadb-store</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-pool</artifactId>
-
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-jaas</artifactId>
 			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -313,7 +374,7 @@
 			<version>1.9.13</version>
 		</dependency>
 
-<dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<exclusions>
@@ -360,19 +421,19 @@
 
 	</dependencies>
 	<build>
-	<finalName>mqttpoc</finalName>
+		<finalName>mqttpoc</finalName>
 		<plugins>
 			<plugin>
-        		<groupId>org.apache.tomcat.maven</groupId>
-        		<artifactId>tomcat7-maven-plugin</artifactId>
-        		<version>2.3-SNAPSHOT</version>
-        		<configuration>
-          		<url>http://localhost:8080/manager/text</url>
-        		</configuration>
-      			</plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.3-SNAPSHOT</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+				</configuration>
+			</plugin>
 		</plugins>
-		
-		
+
+
 	</build>
 	<profiles>
 		<profile>
@@ -384,7 +445,7 @@
 				folder. -->
 			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
-			
+
 			<build>
 				<finalName>mqttpoc</finalName>
 				<plugins>
@@ -400,5 +461,5 @@
 			</build>
 		</profile>
 	</profiles>
-	
+
 </project>

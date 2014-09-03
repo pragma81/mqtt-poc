@@ -29,7 +29,7 @@ public class SpringIntegrationEventPublisher {
 	
 	MessageChannel eventChannel;
 	
-	@Scheduled(fixedDelay = 2000)
+	//@Scheduled(fixedDelay = 2000)
 	public void publishEvent() {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZ");
 		Event event = new Event();
@@ -39,6 +39,7 @@ public class SpringIntegrationEventPublisher {
 		int duration = random.nextInt(30);
 		int month = random.nextInt(12);
 		int day = random.nextInt(30);
+		
 		Calendar startCalendar = GregorianCalendar.getInstance();
 		startCalendar.set(Calendar.MONTH, month);
 		startCalendar.set(Calendar.DAY_OF_MONTH, day);

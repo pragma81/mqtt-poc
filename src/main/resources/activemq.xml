@@ -1,30 +1,25 @@
-<beans
-  xmlns="http://www.springframework.org/schema/beans"
-  xmlns:amq="http://activemq.apache.org/schema/core"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:amq="http://activemq.apache.org/schema/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
   http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
   http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-  
-  <broker xmlns="http://activemq.apache.org/schema/core" useJmx="false">
 
-<!--  
-    <persistenceFactory>
-      <journalPersistenceAdapterFactory journalLogFiles="5" dataDirectory="../data"/>
-    </persistenceFactory>
-  -->
-    <transportConnectors>
-      <!-- <transportConnector uri="tcp://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:61616"/> -->
-      <!-- <transportConnector uri="tcp://localhost:66666"/> -->
-     <transportConnector name="mqtt" uri="mqtt://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:61614" /> 
-     <!-- transportConnector name="mqtt" uri="mqtt://localhost:61614" /-->
-     
-     <transportConnector name="ws" uri="ws://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:8000"  /> 
-     <!-- transportConnector name="ws" uri="ws://localhost:8000"  /--> 
-    </transportConnectors>
-        
-  </broker>
-  
+	<broker xmlns="http://activemq.apache.org/schema/core" useJmx="false">
+
+		<!-- <persistenceFactory> <journalPersistenceAdapterFactory journalLogFiles="5" 
+			dataDirectory="../data"/> </persistenceFactory> -->
+		<transportConnectors>
+
+			<transportConnector name="mqtt"
+				uri="mqtt://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:61614" />
+
+			<transportConnector name="ws"
+				uri="ws://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:8000" />
+
+		</transportConnectors>
+
+	</broker>
+
 </beans>
 
