@@ -11,7 +11,8 @@
 	(insert a solution context diagram).
 	(insert calendar screenshot).
 	
-	![Alt text](mqtt-screenshot-1.png?raw=true "Optional Title")
+![Alt text](mqtt-screenshot-1.png?raw=true "Optional Title")
+
 ##Achievements
 * Bi-directional comunication over web socket using MQTT protocol.
 * Open source MQTT java broker state of art.
