@@ -29,7 +29,7 @@ public class SpringIntegrationEventPublisher {
 	
 	MessageChannel eventChannel;
 	
-	//@Scheduled(fixedDelay = 2000)
+	@Scheduled(fixedDelay = 2000)
 	public void publishEvent() {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZ");
 		Event event = new Event();
