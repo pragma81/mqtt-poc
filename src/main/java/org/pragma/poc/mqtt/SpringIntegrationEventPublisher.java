@@ -54,6 +54,7 @@ public class SpringIntegrationEventPublisher {
 		event.setStart(simpleDateFormat.format(startCalendar.getTime()));
 		event.setEnd(simpleDateFormat.format(endCalendar.getTime()));
 		
+		event.setGenerated(true);
 		GenericMessage<Event> message = new GenericMessage<Event>(event);
 		MessageChannel eventChannel = null;
 		try {

@@ -301,6 +301,12 @@
 			<groupId>org.eclipse.jetty.aggregate</groupId>
 			<artifactId>jetty-all-server</artifactId>
 
+			<exclusions>
+				<exclusion>
+					<artifactId>javax.servlet</artifactId>
+					<groupId>org.eclipse.jetty.orbit</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
@@ -416,20 +422,25 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-
-
 	</dependencies>
+
+
 	<build>
 		<finalName>mqttpoc</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.3-SNAPSHOT</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.3-SNAPSHOT</version>
-				<configuration>
-					<url>http://localhost:8080/manager/text</url>
-				</configuration>
+				
 			</plugin>
 		</plugins>
 

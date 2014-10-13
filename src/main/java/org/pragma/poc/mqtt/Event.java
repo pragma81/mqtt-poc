@@ -12,6 +12,8 @@ public class Event {
 	public String title;
 	public String start;
 	public String end;
+	private Boolean generated = false;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -29,6 +31,14 @@ public class Event {
 	}
 	public void setEnd(String end) {
 		this.end = end;
+	}
+	
+	
+	public Boolean getGenerated() {
+		return generated;
+	}
+	public void setGenerated(Boolean generated) {
+		this.generated = generated;
 	}
 	@Override
 	public String toString() {

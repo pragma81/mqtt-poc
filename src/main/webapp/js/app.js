@@ -6,7 +6,7 @@ $(document).ready(function() {
 		 var userLang = navigator.language || navigator.userLanguage; 
 		
 		$('#datetimepicker1').datetimepicker({
-			language : userLang
+			language : 'en'
 		});	
 		
 		 $('#connect-btn').click(function () {
@@ -92,11 +92,19 @@ $(document).ready(function() {
 			header : {
 				left : 'prev,next today',
 				center : 'title',
-				right : 'month,agendaWeek'
+				right : 'month,agendaWeek,agendaDay'
 			},
-			lang : userLang,
+			timezone : false,
 			editable : true,
-			slotDuration: '00:15:00'
+			slotDuration: '00:15:00',
+			eventRender: function(event, el) {
+				// render the timezone offset below the event title
+				if (event.start.hasZone()) {
+					el.find('.fc-title').after(
+						$('<div class="tzo"/>').text(event.start.format('Z'))
+					);
+				}
+			}
 			
 		});
 
