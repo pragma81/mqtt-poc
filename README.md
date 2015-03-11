@@ -1,4 +1,4 @@
-# MQTT over Websocket with Java ApacheMQ broker. 
+# MQTT over Websocket with Java Apache ActiveMQ broker. 
 
 	This Proof of Concept aims to demonstrate the feasibility and the state of art, in the open source landscape, 
 	of the MQTT protocol over Web Socket using a java broker on the server side.
