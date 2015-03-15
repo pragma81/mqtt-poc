@@ -32,12 +32,6 @@
 * Logback logging framework 1.0.13 (SLF4J 3.7.5)
 * Apache Tomcat 8 as Web Container.
 
-## Guide
-	
-### How to connect /create websocket.
-### How to check events checking (use calendar widget screenshot).
-### How to create custom events.
-		
 ## Configuration and start-up
 Please ensure to have apache maven installed. You can use a machine package manager depending on your OS:
 
@@ -50,13 +44,10 @@ Please ensure to have apache maven installed. You can use a machine package mana
  ```
  mvn clean tomcat7:run
  ```
-### Using Eclipse WTP plugin
-
-	
 	
 ## Well known bugs
+    When entering a custom event , the time is not properly handled in the calendar.
 
-### Locale
 ### Deploy in the cloud.
-	*Cloudbees
-	*Openshift
+	
+	*Openshift - TODO
