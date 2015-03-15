@@ -12,10 +12,10 @@
 		<transportConnectors>
 
 			<transportConnector name="mqtt"
-				uri="mqtt://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:61614" />
+				uri="mqtt://#{systemProperties['host']}:61614" />
 
 			<transportConnector name="ws"
-				uri="ws://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:8000" />
+				uri="ws://#{systemProperties['host']}:8000" />
 
 		</transportConnectors>
 

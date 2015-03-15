@@ -440,7 +440,11 @@
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				
+				<configuration>
+					<systemProperties>
+						<host>localhost</host>
+					</systemProperties>
+				</configuration>
 			</plugin>
 		</plugins>
 
@@ -459,6 +463,15 @@
 
 			<build>
 				<finalName>mqttpoc</finalName>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.tomcat.maven</groupId>
+							<artifactId>tomcat7-maven-plugin</artifactId>
+							<version>2.3-SNAPSHOT</version>
+						</plugin>
+					</plugins>
+				</pluginManagement>
 				<plugins>
 					<plugin>
 						<artifactId>maven-war-plugin</artifactId>
@@ -466,6 +479,15 @@
 						<configuration>
 							<outputDirectory>webapps</outputDirectory>
 							<warName>ROOT</warName>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<configuration>
+							<systemProperties>
+								<host>${env.OPENSHIFT_JBOSSEWS_IP}</host>
+							</systemProperties>
 						</configuration>
 					</plugin>
 				</plugins>

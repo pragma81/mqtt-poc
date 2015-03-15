@@ -39,9 +39,19 @@
 ### How to create custom events.
 		
 ## Configuration and start-up
+Please ensure to have apache maven installed. You can use a machine package manager depending on your OS:
 
+ * macosx - ```brew install maven```
+ * ubuntu - ```apt-get install maven```
+ * centos - ```yum install maven```
+ * windows - ```choco install maven``` (needs chocolatey pre-installed. https://chocolatey.org/ )
+ 
+ Once Maven is properly installed run : 
+ ```
+ mvn clean tomcat7:run
+ ```
 ### Using Eclipse WTP plugin
-### Deploy to a local standalone Tomcat
+
 	
 	
 ## Well known bugs

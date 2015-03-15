@@ -34,7 +34,7 @@
 	<int-mqtt:outbound-channel-adapter
 		id="mqtt-publish-channel" client-id="spring-foo-1" client-factory="clientFactory"
 		auto-startup="true"
-		url="tcp://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:61614"
+		url="tcp://#{systemProperties['host']}:61614"
 		default-qos="0"  
 		default-retained="false"  
 		default-topic="event"  />
@@ -47,7 +47,7 @@
 	<int-mqtt:message-driven-channel-adapter
 		id="mqtt-inbound-channel" 
 		client-id="client"
-		url="tcp://#{systemEnvironment['OPENSHIFT_JBOSSEWS_IP']}:61614"
+		url="tcp://#{systemProperties['host']}:61614"
 		topics="eventInboundTopic" 
 		client-factory="clientFactory" 
 		send-timeout="123"
